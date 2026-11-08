@@ -1,0 +1,7 @@
+const menuButton=document.querySelector(".menu-toggle");const nav=document.querySelector(".nav");
+menuButton.addEventListener("click",()=>nav.classList.toggle("open"));
+document.querySelectorAll(".nav a").forEach(a=>a.addEventListener("click",()=>nav.classList.remove("open")));
+const revealObserver=new IntersectionObserver(items=>items.forEach(item=>{if(item.isIntersecting){item.target.classList.add("show");revealObserver.unobserve(item.target)}}),{threshold:.12});
+document.querySelectorAll(".intro,.center-heading,.service,.photo,.booking-info,.booking-form,.contact>div").forEach(el=>{el.classList.add("reveal");revealObserver.observe(el)});
+const dateInput=document.getElementById("date");dateInput.min=new Date().toISOString().slice(0,10);
+document.getElementById("booking-form").addEventListener("submit",e=>{e.preventDefault();const name=document.getElementById("name").value.trim();const service=document.getElementById("service").value;const date=dateInput.value;const time=document.getElementById("time").value;const whatsapp="5585991359742";const msg=`Olá! Meu nome é ${name}. Gostaria de solicitar um agendamento.%0AServiço: ${service}%0AData: ${date}%0AHorário: ${time}`;window.open(`https://wa.me/${whatsapp}?text=${msg}`,"_blank","noopener")});
